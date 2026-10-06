@@ -1,5 +1,5 @@
 
-const API_URL = "";
+const API_URL = window.location.origin;
 
 async function diagnoseProblem() {
     const problem = document.getElementById("problem").value.trim();
