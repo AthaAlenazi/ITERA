@@ -1,0 +1,128 @@
+{
+  "network": {
+    "keywords": [
+      "wifi",
+      "wi-fi",
+      "wireless",
+      "internet",
+      "network",
+      "connection",
+      "connect",
+      "offline",
+      "can't get online",
+      "cannot get online",
+      "no internet"
+    ],
+    "diagnosis": "Network connection problem",
+    "category": "Network",
+    "solution": [
+      "Check that Wi-Fi is enabled.",
+      "Make sure Airplane Mode is turned off.",
+      "Disconnect from Wi-Fi and reconnect.",
+      "Restart the laptop.",
+      "If the problem continues, contact IT support."
+    ],
+    "it_required": false
+  },
+
+  "email": {
+    "keywords": [
+      "outlook",
+      "email",
+      "mail",
+      "gmail",
+      "send email",
+      "receive email",
+      "inbox",
+      "email not working"
+    ],
+    "diagnosis": "Email problem",
+    "category": "Email",
+    "solution": [
+      "Check your internet connection.",
+      "Restart Outlook.",
+      "Check that you are signed in to your account.",
+      "Check your mailbox storage.",
+      "If the problem continues, contact IT support."
+    ],
+    "it_required": false
+  },
+
+  "authentication": {
+    "keywords": [
+      "password",
+      "login",
+      "log in",
+      "sign in",
+      "account",
+      "locked",
+      "authentication",
+      "username",
+      "cannot login",
+      "cannot sign in"
+    ],
+    "diagnosis": "Login or authentication problem",
+    "category": "Authentication",
+    "solution": [
+      "Check that your username is correct.",
+      "Make sure Caps Lock is not enabled.",
+      "Try entering your password again.",
+      "If your account is locked, contact IT support.",
+      "Do not share your password with anyone."
+    ],
+    "it_required": true
+  },
+
+  "printer": {
+    "keywords": [
+      "printer",
+      "printing",
+      "print",
+      "paper",
+      "printer offline",
+      "cannot print",
+      "printing problem"
+    ],
+    "diagnosis": "Printer problem",
+    "category": "Printer",
+    "solution": [
+      "Check that the printer is powered on.",
+      "Check the printer connection.",
+      "Make sure the printer has paper.",
+      "Check if the printer is showing an error.",
+      "Restart the printer and try again."
+    ],
+    "it_required": false
+  },
+
+  "blue_screen": {
+    "keywords": [
+      "blue screen",
+      "blue screen of death",
+      "bsod",
+      "your pc ran into a problem",
+      "your computer ran into a problem",
+      "computer ran into a problem",
+      "pc ran into a problem",
+      "computer needs to restart",
+      "pc needs to restart",
+      "needs to restart",
+      "system crash",
+      "windows crashed",
+      "computer crashed",
+      "windows blue screen",
+      "windows crash",
+      "your pc ran into a problem and needs to restart"
+    ],
+    "diagnosis": "Windows Blue Screen or System Crash",
+    "category": "System",
+    "solution": [
+      "Restart the computer and check if the problem happens again.",
+      "Disconnect any recently connected external devices.",
+      "Install pending Windows updates.",
+      "Update the device drivers.",
+      "If the Blue Screen keeps appearing, contact IT support for further investigation."
+    ],
+    "it_required": false
+  }
+}

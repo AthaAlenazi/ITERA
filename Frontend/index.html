@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ITERA — Smarter IT Support, Simplified.</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+   <header class="navbar">
+
+    <div class="logo">
+        <img src="logo.png" alt="ITERA Logo">
+    </div>
+
+    <div class="tagline">
+        Smarter IT Support, Simplified.
+    </div>
+
+</header>
+
+
+    <main class="container">
+
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <span class="badge">AI-POWERED IT SUPPORT</span>
+
+                <h1>
+                    Solve IT problems
+                    <span>smarter.</span>
+                </h1>
+
+                <p>
+                    Describe your IT problem or upload a screenshot.
+                    ITERA will analyze the issue and guide you through
+                    the solution.
+                </p>
+
+            </div>
+
+
+            <div class="diagnosis-card">
+
+                <h2>How can we help?</h2>
+
+                <textarea
+                    id="problem"
+                    placeholder="Describe your IT problem here..."
+                ></textarea>
+
+
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+
+                <label class="upload-box">
+
+                    <input
+                        type="file"
+                        id="image"
+                        accept="image/*"
+                    >
+
+                    <div class="upload-content">
+
+                        <div class="upload-icon">📷</div>
+
+                        <strong>Upload a screenshot</strong>
+
+                        <span>
+                            PNG, JPG or JPEG
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <button
+                    id="diagnoseButton"
+                    onclick="diagnoseProblem()"
+                >
+                    Analyze Problem
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section
+            id="result"
+            class="result hidden"
+        >
+
+            <div class="result-header">
+                <span class="badge">ITERA ANALYSIS</span>
+
+                <h2>Diagnosis Result</h2>
+            </div>
+
+
+            <div class="result-grid">
+
+                <div class="result-item">
+
+                    <span class="label">
+                        Diagnosis
+                    </span>
+
+                    <h3 id="diagnosis"></h3>
+
+                </div>
+
+
+                <div class="result-item">
+
+                    <span class="label">
+                        Category
+                    </span>
+
+                    <h3 id="category"></h3>
+
+                </div>
+
+
+                <div class="result-item">
+
+                    <span class="label">
+                        Confidence
+                    </span>
+
+                    <h3>
+                        <span id="confidence"></span>%
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="solution">
+
+                <h3>Recommended Solution</h3>
+
+                <ol id="solutionList"></ol>
+
+            </div>
+
+
+            <div
+                id="supportBox"
+                class="support hidden"
+            >
+
+                <div>
+                    <strong>Need IT assistance?</strong>
+
+                    <p>
+                        This issue may require IT intervention.
+                    </p>
+                </div>
+
+                <button onclick="contactIT()">
+                    Contact IT Support
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            ITERA © 2026 — AI-Powered IT Self-Service
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
