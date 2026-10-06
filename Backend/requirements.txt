@@ -3,4 +3,3 @@ uvicorn[standard]
 python-multipart
 opencv-python-headless
 pytesseract
-scikit-learn
