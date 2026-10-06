@@ -5,9 +5,13 @@ import os
 
 
 # Tesseract OCR path
-pytesseract.pytesseract.tesseract_cmd = (
-    r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-)
+# Use the local Windows path if Tesseract is installed.
+# On deployment servers, Tesseract will be found from the system PATH.
+
+tesseract_path = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+if os.path.exists(tesseract_path):
+    pytesseract.pytesseract.tesseract_cmd = tesseract_path
 
 
 def clean_text(text: str):
