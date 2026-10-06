@@ -1,7 +1,7 @@
 import json
 import os
 
-from services.nlp import model
+from services.nlp import calculate_similarity
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -9,7 +9,6 @@ KNOWLEDGE_BASE_PATH = os.path.join(BASE_DIR, "knowledge_base.json")
 
 
 def load_knowledge_base():
-
     with open(KNOWLEDGE_BASE_PATH, "r", encoding="utf-8") as file:
         return json.load(file)
 
@@ -17,35 +16,31 @@ def load_knowledge_base():
 def retrieve_knowledge(problem: str):
 
     if not problem or not problem.strip():
-
         return []
 
     knowledge_base = load_knowledge_base()
 
-    problem_embedding = model.encode([problem])
-
     results = []
-
-    from sklearn.metrics.pairwise import cosine_similarity
 
     for problem_type, data in knowledge_base.items():
 
-        keywords = data["keywords"]
+        best_score = 0.0
 
-        keyword_embeddings = model.encode(keywords)
+        for keyword in data["keywords"]:
 
-        scores = cosine_similarity(
-            problem_embedding,
-            keyword_embeddings
-        )[0]
+            score = calculate_similarity(
+                problem,
+                keyword
+            )
 
-        score = float(max(scores))
+            if score > best_score:
+                best_score = score
 
         results.append({
             "problem_type": problem_type,
             "category": data["category"],
             "diagnosis": data["diagnosis"],
-            "score": score,
+            "score": round(best_score, 4),
             "solution": data["solution"]
         })
 

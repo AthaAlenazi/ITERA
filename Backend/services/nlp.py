@@ -1,69 +1,80 @@
 import json
 import os
-
-from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
-
+import re
+from difflib import SequenceMatcher
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KNOWLEDGE_BASE_PATH = os.path.join(BASE_DIR, "knowledge_base.json")
 
 
-# Load AI model
-model = SentenceTransformer("all-MiniLM-L6-v2")
-
-
 def load_knowledge_base():
-
     with open(KNOWLEDGE_BASE_PATH, "r", encoding="utf-8") as file:
         return json.load(file)
 
 
-# Load knowledge base once
 knowledge_base = load_knowledge_base()
 
 
-# Prepare keyword embeddings once
-category_embeddings = {}
+def normalize_text(text):
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9\s]", " ", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
 
-for problem_type, data in knowledge_base.items():
 
-    keywords = data["keywords"]
+def calculate_similarity(problem, keyword):
+    problem = normalize_text(problem)
+    keyword = normalize_text(keyword)
 
-    category_embeddings[problem_type] = {
-        "keywords": keywords,
-        "embeddings": model.encode(keywords)
-    }
+    if not problem or not keyword:
+        return 0.0
+
+    # Exact phrase match
+    if keyword in problem:
+        return 1.0
+
+    problem_words = set(problem.split())
+    keyword_words = set(keyword.split())
+
+    if not keyword_words:
+        return 0.0
+
+    common_words = problem_words.intersection(keyword_words)
+
+    word_score = len(common_words) / len(keyword_words)
+
+    text_score = SequenceMatcher(
+        None,
+        problem,
+        keyword
+    ).ratio()
+
+    return max(word_score, text_score)
 
 
 def semantic_diagnosis(problem: str):
 
-    problem = problem.strip()
-
-    if not problem:
+    if not problem or not problem.strip():
         return {
             "problem_type": None,
             "score": 0.0
         }
 
-    problem_embedding = model.encode([problem])
-
     best_problem_type = None
     best_score = 0.0
 
-    for problem_type, data in category_embeddings.items():
+    for problem_type, data in knowledge_base.items():
 
-        scores = cosine_similarity(
-            problem_embedding,
-            data["embeddings"]
-        )[0]
+        for keyword in data["keywords"]:
 
-        category_score = float(max(scores))
+            score = calculate_similarity(
+                problem,
+                keyword
+            )
 
-        if category_score > best_score:
-
-            best_score = category_score
-            best_problem_type = problem_type
+            if score > best_score:
+                best_score = score
+                best_problem_type = problem_type
 
     return {
         "problem_type": best_problem_type,
