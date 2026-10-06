@@ -8,13 +8,24 @@ from diagnosis import diagnose_problem
 from services.vision import analyze_image
 from retrieval import retrieve_knowledge
 
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 app = FastAPI(
     title="ITERA",
     description="AI-Powered IT Self-Service Assistant",
     version="1.0.0"
 )
+FRONTEND_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "Frontend"
+)
 
+app.mount(
+    "/static",
+    StaticFiles(directory=FRONTEND_DIR),
+    name="static"
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -34,12 +45,9 @@ class ProblemRequest(BaseModel):
 
 @app.get("/")
 def home():
-
-    return {
-        "project": "ITERA",
-        "message": "Smarter IT Support, Simplified."
-    }
-
+    return FileResponse(
+        os.path.join(FRONTEND_DIR, "index.html")
+    )
 
 @app.post("/diagnose")
 def diagnose(request: ProblemRequest):
